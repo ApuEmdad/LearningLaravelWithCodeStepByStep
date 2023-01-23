@@ -29,3 +29,15 @@ Route::get("/blade2", [UsersController::class, 'viewAllUsers']);
 /* handle html form */
 Route::get('/login', [loginController::class, 'viewLoginForm']);
 Route::post('login', [loginController::class, 'getUser']);
+
+/* middlewares */
+
+/* global middleeare */
+Route::view("players", "Players");
+Route::view("playersHome", "PlayersHome");
+Route::view("noaccess", "PlayersNoAccess");
+
+/* group middleware */
+Route::group(['middleware' => ['protectedPages']], function () {
+    Route::view("players", "Players");
+});

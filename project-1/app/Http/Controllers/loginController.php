@@ -12,6 +12,10 @@ class loginController extends Controller
     }
     function getUser(Request $request)
     {
+        $request->validate([
+            'name' => 'required | max: 10',
+            'password' => 'required | min: 4',
+        ]);
         return $request->input();
     }
 }
