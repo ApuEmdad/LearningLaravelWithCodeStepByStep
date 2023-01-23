@@ -41,3 +41,9 @@ Route::view("noaccess", "PlayersNoAccess");
 Route::group(['middleware' => ['protectedPages']], function () {
     Route::view("players", "Players");
 });
+
+/* Route Middleware */
+Route::view("players", "Players")->middleware('protectedRoute');
+
+/* configuring database */
+Route::get("/allusers", [UsersController::class, 'viewAllUsers']);
