@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\loginController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,10 @@ Route::get('/', function () {
 Route::view('/', 'welcome');
 
 
+/* blade */
+Route::get("/blade", [UsersController::class, 'viewLoad']);
+Route::get("/blade2", [UsersController::class, 'viewAllUsers']);
 
-Route::get("/users", [UsersController::class, 'viewLoad']);
+/* handle html form */
+Route::get('/login', [loginController::class, 'viewLoginForm']);
+Route::post('login', [loginController::class, 'getUser']);
