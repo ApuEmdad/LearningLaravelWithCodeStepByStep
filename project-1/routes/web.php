@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -50,3 +51,7 @@ Route::get("/allusers", [UsersController::class, 'viewAllUsers']);
 
 /* getting users from jsonplaceholder */
 Route::get("/api-users", [UsersController::class, 'viewApiUsers']);
+
+/* session */
+Route::view('login', 'loginForm');
+Route::post('login', [UserAuthController::class, 'login']);
