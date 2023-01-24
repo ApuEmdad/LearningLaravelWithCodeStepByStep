@@ -47,3 +47,6 @@ Route::view("players", "Players")->middleware('protectedRoute');
 
 /* configuring database */
 Route::get("/allusers", [UsersController::class, 'viewAllUsers']);
+
+/* getting users from jsonplaceholder */
+Route::get("/api-users", [UsersController::class, 'viewApiUsers']);
