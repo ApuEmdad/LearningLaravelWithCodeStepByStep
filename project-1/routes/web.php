@@ -55,3 +55,12 @@ Route::get("/api-users", [UsersController::class, 'viewApiUsers']);
 /* session */
 Route::view('login', 'loginForm');
 Route::post('login', [UserAuthController::class, 'login']);
+Route::view('profile', 'profile');
+
+//clearing the session storage
+Route::get('/logOut', function () {
+    if (session()->has('user')) {
+        session()->pull('user');
+    } 
+    return redirect('login');
+});

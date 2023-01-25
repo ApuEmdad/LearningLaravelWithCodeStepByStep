@@ -10,8 +10,17 @@ class UserAuthController extends Controller
     function login(Request $request)
     {
         $data = $request->input();
+        $request->session()->put([
+            'user' => $data['user'],
+            'email' => $data['email'],
+            'password' => $data['password'],
+        ]); 
+       /*  echo session('user');
+        echo session('email');
+        echo session('password'); */
         // return $data;
-        $request->session()->put('user', $data['user']);
-        echo session('user');
+
+       return redirect('/profile');
+       
     }
 }
