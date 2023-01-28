@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AddMemberController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +63,15 @@ Route::view('profile', 'profile');
 Route::get('/logOut', function () {
     if (session()->has('user')) {
         session()->pull('user');
-    } 
+    }
     return redirect('login');
 });
+
+/* session flash */
+Route::view('addMember', 'AddMember');
+Route::post("addMember", [AddMemberController::class, 'addMember']);
+
+
+/* file upload */
+Route::view('upload', 'upload');
+Route::post('upload', [UploadController::class, 'upload']);

@@ -14,13 +14,9 @@ class UserAuthController extends Controller
             'user' => $data['user'],
             'email' => $data['email'],
             'password' => $data['password'],
-        ]); 
-       /*  echo session('user');
-        echo session('email');
-        echo session('password'); */
-        // return $data;
+        ]);
 
-       return redirect('/profile');
-       
+
+        return redirect('/profile');
     }
 }
