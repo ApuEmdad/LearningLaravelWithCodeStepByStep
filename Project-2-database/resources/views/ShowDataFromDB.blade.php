@@ -13,20 +13,18 @@
     <tbody>
         @foreach ($members as $member)
             <tr>
-                <td>{{ $member['id'] }}</td>
-                <td>{{ $member['name'] }}</td>
-                <td>{{ $member['email'] }}</td>
+                <td>{{ $member->id }}</td>
+                <td>{{ $member->name }}</td>
+                <td>{{ $member->email }}</td>
                 <td>
-                    <a href={{ 'delete/' . $member['id'] }}>delete</a>
-                    <a href={{ 'edit/' . $member['id'] }}>edit</a>
+                    <a href={{ 'delete/' . $member->id }}>delete</a>
+                    <a href={{ 'edit/' . $member->id }}>edit</a>
                 </td>
             </tr>
         @endforeach
     </tbody>
 </table>
-<span>
-    {{ $members->links() }}
-</span>
+
 <style>
     .w-5 {
         display: none

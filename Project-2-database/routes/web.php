@@ -31,3 +31,6 @@ Route::get("/delete/{id}", [memberController::class, 'deleteMember']);
 /* Edit from database */
 Route::get("/edit/{id}", [memberController::class, 'editMember']);
 Route::post("/edit", [memberController::class, 'updateMember']);
+
+/* Show data from db by query builder */
+Route::get("ShowDataFromDB", [memberController::class, 'ShowDataFromDB']);
