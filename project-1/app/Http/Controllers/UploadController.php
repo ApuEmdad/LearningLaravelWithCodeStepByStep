@@ -8,6 +8,7 @@ class UploadController extends Controller
 {
     function upload(Request $request)
     {
-        return $request->file('file')->store('docs');
+        // return "hello from controller";
+        return $request->file('file')->store('photos');
     }
 }
