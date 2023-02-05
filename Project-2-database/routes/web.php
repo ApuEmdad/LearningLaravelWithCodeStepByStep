@@ -26,4 +26,8 @@ Route::view('addMember', 'addMember');
 Route::post('addMember', [addMemberController::class, 'addMember']);
 
 /* delete from database */
-Route::delete("/delete/{id}", [memberController::class, 'deleteMember']);
+Route::get("/delete/{id}", [memberController::class, 'deleteMember']);
+
+/* Edit from database */
+Route::get("/edit/{id}", [memberController::class, 'editMember']);
+Route::post("/edit", [memberController::class, 'updateMember']);
