@@ -109,7 +109,6 @@ class memberController extends Controller
             ->join('orders', 'users.id', '=', 'orders.user_id')
             ->select('users.*', 'contacts.phone', 'orders.price')
             ->get();
-
         return $users;
     }
 
