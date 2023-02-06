@@ -34,3 +34,9 @@ Route::post("/edit", [memberController::class, 'updateMember']);
 
 /* Show data from db by query builder */
 Route::get("ShowDataFromDB", [memberController::class, 'ShowDataFromDB']);
+
+/* Aggregate */
+Route::get('aggregate', [memberController::class, 'aggregate']);
+
+/* Join */
+Route::get('join', [memberController::class, 'join']);

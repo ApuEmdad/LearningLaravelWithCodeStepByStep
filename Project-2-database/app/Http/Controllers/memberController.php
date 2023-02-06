@@ -42,16 +42,23 @@ class memberController extends Controller
     function ShowDataFromDB()
     {
         $data = DB::table('members')->get();
-        // returns an array of json data
+        return $data;
+        /*====  returns an array of json data ====*/
         // return $data; 
+
+
+        /*====  returns the data in tabular form ====*/
         /*  return view('ShowDataFromDB', ['members' => $data]); */
-        //    returns the data in tabular form
+
+        /* ==== Filter ==== */
         /* return $data
         ->where('email', "effat@effat"); //returns all effat@effat=3 ids */
 
-        // return $data->count(); // returns total number of data
 
-        /* insert data */
+        /* ==== returns total number of data  ==== */
+        // return $data->count(); 
+
+        /*==== inserts data ====*/
         /*    return DB::table('members')
         ->insert(
         [
@@ -60,7 +67,7 @@ class memberController extends Controller
         ]
         ); */
 
-        /* update data */
+        /*==== update data ====*/
         /*    return DB::table('members')
         ->where('id', 10)
         ->insert(
@@ -70,9 +77,41 @@ class memberController extends Controller
         ]
         ); */
 
+        /* ==== DELETE === */
         /*    return DB::table('members')
         ->where('id', 10) ->delete()
         */
 
     }
+
+    /* aggregate */
+    function aggregate()
+    {
+        /* ==== Returns all the data in members table ==== */
+        // return DB::table('members')->get();
+
+        /* ==== Returns the average of ids in members table ==== */
+        // return DB::table('members')->avg(('id'));
+
+        /* ==== Returns the sum of ids in members table ==== */
+        // return DB::table('members')->sum(('id'));
+
+        /* ==== Returns the max id in members table ==== */
+        return DB::table('members')->max(('id'));
+
+    }
+
+    /* ==== JOIN tables ==== */
+    function join()
+    {
+        $users = DB::table('users')
+            ->join('contacts', 'users.id', '=', 'contacts.user_id')
+            ->join('orders', 'users.id', '=', 'orders.user_id')
+            ->select('users.*', 'contacts.phone', 'orders.price')
+            ->get();
+
+        return $users;
+    }
+
+
 }
