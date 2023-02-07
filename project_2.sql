@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 06, 2023 at 08:23 AM
+-- Generation Time: Feb 07, 2023 at 07:51 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -24,6 +24,47 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `cars`
+--
+
+CREATE TABLE `cars` (
+  `id` int(11) NOT NULL,
+  `license_number` varchar(255) DEFAULT NULL,
+  `model` varchar(255) DEFAULT NULL,
+  `color` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cars`
+--
+
+INSERT INTO `cars` (`id`, `license_number`, `model`, `color`) VALUES
+(1, '123456789', 'Toyota Camry', 'Silver'),
+(2, '987654321', 'Honda Civic', 'Red');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `companies`
+--
+
+CREATE TABLE `companies` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL,
+  `member_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `companies`
+--
+
+INSERT INTO `companies` (`id`, `name`, `member_id`) VALUES
+(1, 'Samsung', 1),
+(2, 'google', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contacts`
 --
 
@@ -40,6 +81,27 @@ CREATE TABLE `contacts` (
 INSERT INTO `contacts` (`id`, `user_id`, `phone`) VALUES
 (1, 1, '555-555-1234'),
 (2, 2, '555-555-5678');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `drivers`
+--
+
+CREATE TABLE `drivers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `driver_license` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `drivers`
+--
+
+INSERT INTO `drivers` (`id`, `name`, `driver_license`, `address`) VALUES
+(1, 'John Doe', '123456789', '123 Main St'),
+(2, 'Jane Doe', '987654321', '456 Oak Ave');
 
 -- --------------------------------------------------------
 
@@ -90,7 +152,7 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`id`, `name`, `email`, `createdAt`) VALUES
 (1, 'mamun', 'mamun@mamun', '2023-02-05 04:17:52'),
-(3, 'effat', 'effat@effat', '2023-02-05 05:17:52'),
+(2, 'effat', 'effat@effat', '2023-02-05 05:17:52'),
 (4, 'tonmoy', 'tonmoy@tonmoy', '2023-02-05 05:21:52'),
 (5, 'rubel', 'rubel@rubel', '2023-02-05 05:25:52'),
 (6, 'minhaj', 'minhaj@minhaj', '2023-02-05 05:31:52'),
@@ -141,17 +203,22 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) DEFAULT NULL,
-  `price` decimal(10,2) DEFAULT NULL
+  `user_id` int(11) NOT NULL,
+  `order_number` varchar(100) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `order_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `price`) VALUES
-(1, 1, '99.99'),
-(2, 2, '49.99');
+INSERT INTO `orders` (`id`, `user_id`, `order_number`, `price`, `order_date`) VALUES
+(1, 1, 'ORD001', '100.00', '2022-01-01'),
+(2, 1, 'ORD002', '200.00', '2022-01-02'),
+(3, 2, 'ORD003', '150.00', '2022-01-03'),
+(4, 2, 'ORD004', '75.00', '2022-01-04'),
+(5, 3, 'ORD005', '300.00', '2022-01-05');
 
 -- --------------------------------------------------------
 
@@ -210,11 +277,31 @@ INSERT INTO `users` (`id`, `name`, `email`, `createdAt`, `updatedAt`) VALUES
 --
 
 --
+-- Indexes for table `cars`
+--
+ALTER TABLE `cars`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `license_number` (`license_number`);
+
+--
+-- Indexes for table `companies`
+--
+ALTER TABLE `companies`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contacts`
 --
 ALTER TABLE `contacts`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `drivers`
+--
+ALTER TABLE `drivers`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `driver_license` (`driver_license`);
 
 --
 -- Indexes for table `failed_jobs`
@@ -245,8 +332,7 @@ ALTER TABLE `migrations`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `password_resets`
@@ -273,9 +359,27 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `cars`
+--
+ALTER TABLE `cars`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `companies`
+--
+ALTER TABLE `companies`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `drivers`
+--
+ALTER TABLE `drivers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
@@ -306,7 +410,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -325,16 +429,16 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `cars`
+--
+ALTER TABLE `cars`
+  ADD CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`license_number`) REFERENCES `drivers` (`driver_license`);
+
+--
 -- Constraints for table `contacts`
 --
 ALTER TABLE `contacts`
   ADD CONSTRAINT `contacts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
-
---
--- Constraints for table `orders`
---
-ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

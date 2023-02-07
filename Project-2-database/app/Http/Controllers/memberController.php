@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -111,6 +112,24 @@ class memberController extends Controller
             ->get();
         return $users;
     }
+    /*==== One to one relation ====*/
+    function getComapanyOfMember()
+    {
+        return Member::find(2)
+            ->getCompany;
+    }
+
+    /*==== One to many relation ====*/
+    function getOrders()
+    {
+        $user = User::find(1);
+        $orders = $user->orders;
+        return $orders;
+    }
+
+
+
+
 
 
 }

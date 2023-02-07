@@ -40,3 +40,10 @@ Route::get('aggregate', [memberController::class, 'aggregate']);
 
 /* Join */
 Route::get('join', [memberController::class, 'join']);
+
+
+/* One to one relation */
+Route::get('getComapanyOfMember', [memberController::class, 'getComapanyOfMember']);
+
+/* One to many relation */
+Route::get('getOrders', [memberController::class, 'getOrders']);
